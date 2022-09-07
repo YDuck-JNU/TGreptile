@@ -1,0 +1,5 @@
+FROM d3fk/python_in_bottle:latest
+COPY . /tg
+WORKDIR /tg
+RUN pip3 install -r requirements.txt
+ENTRYPOINT ["sh", "tg.sh"]
