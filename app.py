@@ -29,7 +29,7 @@ def tc():
     jd_sql('jd_tk')
 
 
-@scheduler.task('interval', id='mai', minutes=5)
+@scheduler.task('interval', id='mai', minutes=read_yaml()['time'])
 def mai():
     yml = read_yaml()
     ts1 = tg_judge()

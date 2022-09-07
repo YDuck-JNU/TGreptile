@@ -37,7 +37,7 @@ def tx_revise():
                     jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
                     if len(jdht) > 0:
                         logger.write_log(
-                            '活动链接手动添加: ' + f'<div style="color: rgb(255, 187, 0); font-weight: bolder; width: auto; height: auto; border-color: aqua; border-width: 3px; border-style: solid;">{str(j)}</div>')
+                            '活动链接手动添加: ' + '{str(j)}')
                         # 把获取的链接传入jd_Activity函数
                         # jdtoc = jd_Activity(jdht[0])
                         # 判断是否有数据

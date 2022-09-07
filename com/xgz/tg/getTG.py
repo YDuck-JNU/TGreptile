@@ -45,7 +45,7 @@ def get_tele(url, headers, cookie):
         output.encoding = 'utf-8'
         return [output.status_code, output.text]
     except Exception as e:
-        logger.write_log("get_tele,获取电报" + str(url) + "网页异常: " + str(e))
+        logger.write_log("get_tele,获取电报: " + str(url) + " 网页异常: " + str(e))
 
 
 def re_filter(path, te_text):

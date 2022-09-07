@@ -6,7 +6,9 @@ from com.xgz.gheaders.ti import fast_forward
 from com.xgz.jd.jd_filter import jd_sql
 from com.xgz.sql.JD_ql import select_data
 from com.xgz.sql.sign import to_select
+
 logger = LoggerClass('debug')
+
 
 def tx_compared():
     """
@@ -58,7 +60,7 @@ def tx_compared():
                         continue
                     # 再查询这个值在不在jd_value3中
                     value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
-                    if len(value3) > 0 :
+                    if len(value3) > 0:
                         # 下面是js和名称
                         script.append(value3[0][0])
                         variable.append(i)

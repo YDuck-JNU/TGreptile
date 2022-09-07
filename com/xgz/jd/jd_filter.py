@@ -27,7 +27,7 @@ def jd_sql(txt=None):
                 shop = shop_sign(i[0])
                 # 返回0表示修改成功，1表示修改失败
                 if shop == 402 or shop == -1:
-                    logger.write_log(f"删除失效店铺签到 {i[0]}")
+                    logger.write_log(f"删除失效店铺签到: {i[0]}")
                     to_delete(i[0])
                 continue
         # 检查str1是否为空

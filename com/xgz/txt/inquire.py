@@ -21,7 +21,7 @@ def fuzzy_query(url=None):
                 zzbds = re.findall(r'{}.*?'.format(str(lines[i][0])), url)
                 if zzbds is not None and len(zzbds) > 0:
                     return [lines[i][0], values[i][0], values[i][1], values[i][2], values[i][3]]
-        logger.write_log("模糊查询中 " + str(url) + " 没有找到,请添加")
+        logger.write_log("模糊查询中: " + str(url) + " 没有找到,请添加")
         return -1
     except Exception as e:
         logger.write_log("inquire.fuzzy_query,异常问题: " + str(e))
