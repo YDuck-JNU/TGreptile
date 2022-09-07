@@ -15,7 +15,7 @@ def qlcs():
     return read_yaml(ql['htmltx'])
 
 
-@app.route("/qlrz")
+@app.route("/log")
 def qlrz():
     return rz()
 
