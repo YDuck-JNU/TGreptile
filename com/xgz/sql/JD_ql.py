@@ -20,7 +20,7 @@ def create_db():
 
 
 # 插入数据方法
-def insert_data(id, jd_name, jd_js, jd_value1, jd_value2=None, jd_value3=None, jd_url=None, jd_re=None):
+def insert_data(id, jd_name, jd_js, jd_value1, jd_value2=None, jd_value3=None, jd_url=None, jd_re=None) -> int | Exception:
     """
     插入一条数据
     :param id: id 唯一标识
@@ -33,24 +33,23 @@ def insert_data(id, jd_name, jd_js, jd_value1, jd_value2=None, jd_value3=None, j
     :param jd_re: 设置的正则表达式
     :return: 返回0表示插入成功，返回1表示插入失败
     """
-    db = None
     try:
         # 获取sql连接
         cursor, db = create_db()
         # 插入数据 ip, port,  protocol, country
-        cursor.execute(f"insert into JdQl values('{id}','{jd_name}','{jd_js}','{jd_value1}', '{jd_value2}', '{jd_value3}', '{jd_url}', '{jd_re}')")
+        cursor.execute(
+            f"insert into JdQl values('{id}','{jd_name}','{jd_js}','{jd_value1}', '{jd_value2}', '{jd_value3}', '{jd_url}', '{jd_re}')")
         # cursor.execute("insert into ip values('%s',)" %)
         db.commit()
         # 关闭数据库
         db.close()
         return 0
     except Exception as e:
-        print(e)
         return e
 
 
 # 查询数据方法
-def select_data(data='*', value='None'):
+def select_data(data='*', value='None') -> list:
     """
     查询数据
     :param data: 查询的字段,默认为*
@@ -71,11 +70,11 @@ def select_data(data='*', value='None'):
         db.close()
         return data
     except Exception as e:
-        return 1
+        return []
 
 
 # 删除所有数据方法
-def delete_data():
+def delete_data() -> int | Exception:
     """
     删除数据,别调用调用了自己修
     :return: 返回0表示有数据并且删除成功，返回1表示没有成功
@@ -90,11 +89,11 @@ def delete_data():
         db.close()
         return 0
     except Exception as e:
-        return 1
+        return e
 
 
 # 删除某一条数据方法
-def delete_one_data(key, value):
+def delete_one_data(key, value) -> int | Exception:
     """
     删除某一条数据方法
     :param key: 字段名
@@ -114,7 +113,7 @@ def delete_one_data(key, value):
         return e
 
 
-def update_date(token, day):
+def update_date(token, day) -> int | Exception:
     """
     修改数据，根据token的值，修改day
     :param token:
@@ -132,4 +131,4 @@ def update_date(token, day):
         db.close()
         return 0
     except Exception as e:
-        return 1
+        return e

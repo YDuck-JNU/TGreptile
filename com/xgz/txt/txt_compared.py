@@ -37,9 +37,8 @@ def tx_compared():
 
         for i in tx:
             try:
-
                 # 切割字符串
-                if i[0:6:1] == 'export':
+                if i[0:6:1] == 'export' or i[0:9:1] == 'NOTexport':
                     # 把export DPLHTY="b4be"的键和值分开
                     tx = i.split('=')
                     # 先查询这个值在不在jd_value1中

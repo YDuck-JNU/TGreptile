@@ -37,7 +37,7 @@ def tx_revise():
                     jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
                     if len(jdht) > 0:
                         logger.write_log(
-                            '活动链接手动添加: ' + '{str(j)}')
+                            '活动链接手动添加: ' + str(j))
                         # 把获取的链接传入jd_Activity函数
                         # jdtoc = jd_Activity(jdht[0])
                         # 判断是否有数据
@@ -53,18 +53,16 @@ def tx_revise():
                     for v in cs:
                         D = v.split(' ')
                         for d in D:
-                            for s in d.split('&'):
-                                jdtx = re.findall(r'^(?!https:|export)([a-zA-Z0-9&]{30,40})$', s, re.S)
-                                if len(jdtx) > 0 and jdtx[0] not in '_' and jdtx[0] not in 'jd':
-                                    shopsign += jdtx[0] + '&'
-                                    insert = to_insert(jdtx[0])
-                                    if insert[0] == -1:
-                                        logger.write_log('插入 ' + str(jdtx[0]) + '失败, 完整信息是 ' + str(
-                                            j) + ' 异常信息是 ' + str(insert[1]))
-                                        continue
-                                    logger.write_log('插入成功 ' + str(jdtx[0]))
-                                # 跳过本次循环
-                                continue
+                            jdtx = re.findall(r'^(?!https:|export)([a-zA-Z0-9]{30,40})$', d, re.S)
+                            if len(jdtx) > 0 and jdtx[0] not in '_' and jdtx[0] not in 'jd':
+                                insert = to_insert(jdtx[0])
+                                if insert[0] == -1:
+                                    logger.write_log('插入 ' + str(jdtx[0]) + '失败, 完整信息是 ' + str(j) + ' 异常信息是 ' + str(insert[1]))
+                                    continue
+                                shopsign += jdtx[0] + '&'
+                                logger.write_log('插入成功 ' + str(jdtx[0]))
+                            # 跳过本次循环
+                            continue
                     exht = re.findall('.*?(export \w+="<a href="https://.*?")', j, re.S)
                     extx = re.findall(r'.*?(export \w+="?\w+"?)', j, re.S)
                     htttx = re.findall(r'.*?href="(https://.*?)"', j, re.S)
