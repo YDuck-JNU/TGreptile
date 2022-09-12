@@ -4,6 +4,7 @@
 import re
 
 from com.xgz.gheaders.log import LoggerClass
+from com.xgz.sql.JD_ql import select_data
 from com.xgz.txt.inquire import fuzzy_query
 logger = LoggerClass('debug')
 
@@ -20,6 +21,14 @@ def export_https(exht):
         separate[1] = separate[1].replace('"', '')
         # 去掉最后的/,如果是链接抓取到的会自动带最后/，但是参数不需要/
         separate[1] = separate[1].rstrip('/')
+        # 下面是修改活动参数,调用数据库的正则表达式
+        va = separate[0].strip('=')
+        sq = select_data(data='jd_re', value=f'jd_value1="{va}"')
+        # 如果等于0表示没有查询到
+        if len(sq) > 0:
+            # 获取设置得正则表达式
+            separ = re.findall(f'{sq[0][0]}', separate[1])
+            separate[1] = separ[0]
         # 把两端重新拼接并且返回
         return separate[0] + "\"" + separate[1] + "\" "
     except Exception as e:
@@ -37,6 +46,7 @@ def export_txt(extx):
         # 把extx分隔，去除中间的"="
         # 按=分隔
         separate = extx.split('=')
+
         # 去除separate[1]前后的",避免有的值有有的没有
         separate[1] = separate[1].replace('"', '')
         # 把两端重新拼接并且返回
