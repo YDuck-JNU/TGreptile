@@ -1,6 +1,9 @@
 """
 主方法，用于执行爬虫
 """
+import os
+import re
+
 from flask import Flask
 from flask_apscheduler import APScheduler
 
@@ -18,6 +21,7 @@ app.register_blueprint(web.app, url_prefix='/')
 app.register_blueprint(add.app, url_prefix='/sql')
 # 下面是定时任务
 scheduler = APScheduler()
+yml = read_yaml()
 
 
 @scheduler.task('interval', id='tk', hours=12)
@@ -31,7 +35,6 @@ def tc():
 
 @scheduler.task('interval', id='mai', minutes=read_yaml()['time'])
 def mai():
-    yml = read_yaml()
     ts1 = tg_judge()
     # # 判断返回的值是否为非-1
     # # 获取时间用于判断
@@ -46,8 +49,20 @@ def mai():
         add_null()
 
 
+def data():
+    """
+    如果没保存数据的文件则创建
+    :return:
+    """
+    pa = re.findall('(.*?)/\w+\.\w+', yml['htmltx'])
+    if pa:
+        if not os.path.exists(pa[0]):  # 判断日志存储文件夹是否存在，不存在，则新建
+            os.makedirs(pa[0])
+
+
 # 主方法
 if __name__ == '__main__':
     scheduler.start()
+    data()
     mai()
     app.run(host='0.0.0.0', port=5000, debug=False)

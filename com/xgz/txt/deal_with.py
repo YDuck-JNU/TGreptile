@@ -6,7 +6,9 @@ import re
 from com.xgz.gheaders.log import LoggerClass
 from com.xgz.sql.JD_ql import select_data
 from com.xgz.txt.inquire import fuzzy_query
+
 logger = LoggerClass('debug')
+
 
 def export_https(exht):
     """
@@ -28,7 +30,10 @@ def export_https(exht):
         if len(sq) > 0:
             # 获取设置得正则表达式
             separ = re.findall(f'{sq[0][0]}', separate[1])
-            separate[1] = separ[0]
+            if len(separ) > 0:
+                separate[1] = separ[0]
+            else:
+                logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
         # 把两端重新拼接并且返回
         return separate[0] + "\"" + separate[1] + "\" "
     except Exception as e:
@@ -59,7 +64,7 @@ def export_txt(extx):
 def https_txt(http):
     """
     处理.*?>(https://.*?\?\w+=\w+)</a>
-    :param https: 待处理的数据
+    :param http: 待处理的数据
     :return: 处理后的行，异常返回-1
     """
     try:
