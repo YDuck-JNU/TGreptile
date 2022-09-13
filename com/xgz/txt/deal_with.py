@@ -30,8 +30,10 @@ def export_https(exht):
         if len(sq) > 0:
             # 获取设置得正则表达式
             separ = re.findall(f'{sq[0][0]}', separate[1])
-            if len(separ) > 0:
+            if len(separ) == 1:
                 separate[1] = separ[0]
+            elif len(separ) > 1:
+                logger.write_log(f"问题值 : {separate[1]} <br> 正则表达式: {sq[0][0]}")
             else:
                 logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
         # 把两端重新拼接并且返回

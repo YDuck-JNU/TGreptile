@@ -21,7 +21,7 @@ def re_exht(file_new, exht, marks):
             exhtx = exhtx.replace('%26', '&')
             # 把exht分隔
             separate = exhtx.split('=')
-            print(separate)
+            # print(separate)
             # 保证一行只能存在一个相同参数
             if separate[0] not in marks:
 

@@ -11,6 +11,7 @@ from com.xgz.gheaders.conn import read_yaml, read_txt, delete_first_lines
 
 yml = read_yaml()
 
+
 class LoggerClass:
     logFile = yml['log']  # 定义日志存储的文件夹
     log_colors_config = {

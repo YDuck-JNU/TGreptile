@@ -46,6 +46,7 @@ def get_tele(url, headers, cookie):
         return [output.status_code, output.text]
     except Exception as e:
         logger.write_log("get_tele,获取电报: " + str(url) + " 网页异常: " + str(e))
+        return [-1]
 
 
 def re_filter(path, te_text):
@@ -110,6 +111,9 @@ def tg_judge():
             # 获取TG的请求头
             tg_h = tg_header(ymltx['url'][int(i)])
             get_te = get_tele(ymltx['url'][i], tg_h, ymltx['cookie'])
+            # 如果异常跳过
+            if len(get_te) == 1:
+                continue
             # 判断状态码是否为200
             if get_te[0] == 200:
                 re_filter(ymltx['path'], get_te[1])
