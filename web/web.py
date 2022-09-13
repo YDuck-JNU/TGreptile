@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template
+from flask import request
 
 from com.xgz.gheaders.conn import read_yaml
 from com.xgz.gheaders.log import rz
@@ -12,7 +12,10 @@ ql = read_yaml()
 
 @app.route("/qlcs")
 def qlcs():
-    return read_yaml(ql['htmltx'])
+    if request.environ['REMOTE_ADDR'] in ql['black']:
+        return "你已经被拉入黑名单"
+    else:
+        return read_yaml(ql['htmltx'])
 
 
 @app.route("/log")
@@ -28,4 +31,5 @@ def sql():
 
 @app.route("/")
 def index():
+    print(request.environ['REMOTE_ADDR'])
     return "你好本程序运行正常运行"
