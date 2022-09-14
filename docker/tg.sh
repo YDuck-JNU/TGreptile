@@ -1,4 +1,10 @@
 #!/bin/sh
+if [ -d "/TGreptile" ];then
+  cd /TGreptile || exit
+else
+  echo "检测到文件不存在拉取新项目"
+  sh /root/gi.sh
+fi
 while true
 do
     # 停止返回0 正常返回1

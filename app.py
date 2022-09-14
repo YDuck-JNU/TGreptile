@@ -62,6 +62,7 @@ def data():
 
 # 主方法
 if __name__ == '__main__':
+    print('程序启动成功')
     scheduler.start()
     data()
     mai()
