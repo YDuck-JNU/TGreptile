@@ -1,5 +1,6 @@
 FROM d3fk/python_in_bottle:latest
-COPY . /tg
-WORKDIR /tg
+COPY . /TGreptile
+RUN apk add --update git
+WORKDIR /TGreptile
 RUN pip3 install -r requirements.txt
 ENTRYPOINT ["sh", "tg.sh"]

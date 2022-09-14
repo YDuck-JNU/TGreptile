@@ -29,4 +29,8 @@ acting:
 # 针对特殊脚本的设置,NOT是告诉子段这个不去重
 js:
   - [ 'jd_shopqd.js', 'NOTexport DPQDTK', '00:06' ]
+# 黑名单
 black: ['221.124.250.54']
+# 用于记录行
+Label:
+  time: 14
