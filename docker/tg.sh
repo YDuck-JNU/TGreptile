@@ -3,7 +3,11 @@ if [ -d "/TGreptile" ];then
   cd /TGreptile || exit
 else
   echo "检测到文件不存在拉取新项目"
-  sh /root/gi.sh
+  cd /
+  git clone https://github.com/XgzK/TGreptile.git
+  cd /TGreptile || exit
+  pip3 install -r requirements.txt
+#  sh /root/gi.sh
 fi
 while true
 do
