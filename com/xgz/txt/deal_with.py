@@ -32,10 +32,10 @@ def export_https(exht):
             separ = re.findall(f'{sq[0][0]}', separate[1])
             if len(separ) == 1:
                 separate[1] = separ[0]
-            elif len(separ) > 1:
-                logger.write_log(f"问题值 : {separate[1]} <br> 正则表达式: {sq[0][0]}")
-            else:
-                logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
+            # elif len(separ) > 1:
+            #     logger.write_log(f"问题值 : {separate[1]} <br> 正则表达式: {sq[0][0]}")
+            # else:
+            #     logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
         # 把两端重新拼接并且返回
         return separate[0] + "\"" + separate[1] + "\" "
     except Exception as e:
@@ -58,7 +58,7 @@ def export_txt(extx):
         separate[1] = separate[1].replace('"', '')
         # 程序第一个值是不是和自己相识
         sq = select_data(data='jd_value1', value=f'jd_value1="NOT{separate[0]}"')
-        print('查询的结果是', sq)
+        # print('查询的结果是', sq)
         if len(sq) > 0:
             # 获取设置得正则表达式
             separate[0] = 'NOT' + separate[0]
@@ -75,7 +75,6 @@ def https_txt(http):
     :param http: 待处理的数据
     :return: 处理后的行，异常返回-1
     """
-    print(http)
     try:
         # 先查询是否存有这个链接
         Ink = fuzzy_query(http)
