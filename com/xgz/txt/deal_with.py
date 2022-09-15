@@ -56,6 +56,12 @@ def export_txt(extx):
 
         # 去除separate[1]前后的",避免有的值有有的没有
         separate[1] = separate[1].replace('"', '')
+        # 程序第一个值是不是和自己相识
+        sq = select_data(data='jd_value1', value=f'jd_value1="NOT{separate[0]}"')
+        print('查询的结果是', sq)
+        if len(sq) > 0:
+            # 获取设置得正则表达式
+            separate[0] = 'NOT' + separate[0]
         # 把两端重新拼接并且返回
         return str(separate[0]) + "=\"" + str(separate[1]) + "\" "
     except Exception as e:
@@ -69,6 +75,7 @@ def https_txt(http):
     :param http: 待处理的数据
     :return: 处理后的行，异常返回-1
     """
+    print(http)
     try:
         # 先查询是否存有这个链接
         Ink = fuzzy_query(http)
@@ -86,6 +93,12 @@ def https_txt(http):
                     elif Ink[2] is not None and Ink[2] != "":
                         return Ink[1] + "=\"" + htt3[0][0] + "\" " + Ink[2] + "=\"" + htt3[0][1] + "\""
                     elif Ink[1] is not None and Ink[1] != "":
+                        # print(Ink[1])
+                        # 正常不去重复的值都是一个
+                        sq = select_data(data='jd_value1', value=f'jd_value1="NOT{Ink[1]}"')
+                        if len(sq) == 1:
+                            # 获取设置得正则表达式
+                            Ink[1] = 'NOT' + Ink[1]
                         return Ink[1] + "=\"" + htt3[0] + "\""
                     else:
                         logger.write_log("https_txt,请检查此链接: " + str(http))
