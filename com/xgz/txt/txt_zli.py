@@ -33,43 +33,36 @@ def tx_revise():
                 line = i.split('<br/>')
                 # 同行内容循环
                 for j in line:
-                    # 处理特殊数据，根据链接获取ct
+                    # 处理特殊数据
                     jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
                     if len(jdht) > 0:
-                        logger.write_log(
-                            '活动链接手动添加: ' + str(j))
-                        # 把获取的链接传入jd_Activity函数
-                        # jdtoc = jd_Activity(jdht[0])
-                        # 判断是否有数据
-                        # if jdtoc != -1:
-                        #     shopsign += jdtoc + '&'
-                        #     to_insert(jdtoc)
+                        # logger.write_log('活动链接手动添加: ' + str(j))
                         # 跳过本次循环
                         continue
                     # 处理特殊数据直接获取ct
                     # 筛选非https开头和export开头的数据
                     # 为了应付带空格的
-                    cs = j.split('=')
-                    for v in cs:
-                        D = v.split(' ')
-                        for d in D:
-                            jdtx = re.findall(r'^(?!https:|export)([a-zA-Z0-9]{30,40})$', d, re.S)
-                            if len(jdtx) > 0 and jdtx[0] not in '_' and jdtx[0] not in 'jd':
-                                insert = to_insert(jdtx[0])
+                    for v in j.split('='):
+                        for d in v.split(' '):
+                            jd_tx = re.findall(r'^(?!https:|export)([a-zA-Z0-9]{30,40})$', d, re.S)
+                            if len(jd_tx) > 0 and jd_tx[0] not in '_' and jd_tx[0] not in 'jd':
+                                insert = to_insert(jd_tx[0])
                                 if insert[0] == -1:
-                                    logger.write_log('插入 ' + str(jdtx[0]) + '失败, 完整信息是 ' + str(j) + ' 异常信息是 ' + str(insert[1]))
+                                    logger.write_log(
+                                        '插入 ' + str(jd_tx[0]) + '失败, 完整信息是 ' + str(j) + ' 异常信息是 ' +
+                                        insert[1])
                                     continue
-                                shopsign += jdtx[0] + '&'
-                                logger.write_log('插入成功 ' + str(jdtx[0]))
+                                shopsign += jd_tx[0] + '&'
+                                logger.write_log('插入成功 ' + str(jd_tx[0]))
                             # 跳过本次循环
                             continue
-                    exht = re.findall('.*?(export \w+="<a href="https://.*?")', j, re.S)
-                    extx = re.findall(r'.*?(export \w+="?\w+"?)', j, re.S)
-                    htttx = re.findall(r'.*?href="(https://.*?)"', j, re.S)
+                    ex_ht = re.findall('.*?(export \w+="<a href="https://.*?")', j, re.S)
+                    ex_tx = re.findall(r'.*?(export \w+="?\w+"?)', j, re.S)
+                    ht_tx = re.findall(r'.*?href="(https://.*?)"', j, re.S)
 
                     # 如果开头是export =后面有"https://则添加到文本中
-                    if exht:
-                        ht = re_exht(file_new, exht, marks)
+                    if ex_ht:
+                        ht = re_exht(file_new, ex_ht, marks)
                         if ht == -1:
                             # 跳过本次循环
                             continue
@@ -80,8 +73,8 @@ def tx_revise():
                         continue
                     # 如果开头是export或https://开头 =后面没有"https://则添加到文本中
                     else:
-                        if len(extx) > 0:
-                            tx = re_extx(file_new, extx, marks)
+                        if len(ex_tx) > 0:
+                            tx = re_extx(file_new, ex_tx, marks)
                             if tx == -1:
                                 continue
                             ft = 0
@@ -89,9 +82,9 @@ def tx_revise():
                             for k in range(len(tx)):
                                 marks.append(tx[k])
                             continue
-                        # 判断获取的htttx是否为空，如果不为空则进入
-                        if len(htttx) > 0:
-                            htt = re_htt(file_new, htttx, marks)
+                        # 判断获取的ht_tx是否为空，如果不为空则进入,https的链接
+                        if len(ht_tx) > 0:
+                            htt = re_htt(file_new, ht_tx, marks)
                             if htt == -1:
                                 continue
                             ft = 0

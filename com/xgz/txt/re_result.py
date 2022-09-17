@@ -71,27 +71,33 @@ def re_extx(file_new, extx, marks):
         return -1
 
 
-def re_htt(file_new, htttx, marks):
+def re_htt(file_new, httx, marks):
     """
     用与修改文本,只保留关键字到文本，处理的是txt_zli.py中的https_txt的内容
     :param file_new: 文件对象
-    :param htttx: 匹配到的内容
+    :param httx: 匹配到的内容
     :param marks: 去重用的标记
     :return: 正常返回marks, 否则返回-1
     """
     try:
         # 使用这个循环是防止有人不换行把内容都放在一行
-        for ht in htttx:
+        for ht in httx:
             htt = https_txt(ht)
-            if htt != -1:
-                # 把htt分隔
-                separate = htt.split('=')
-                # 保证一行只能存在一个相同参数
-                if separate[0] not in marks:
-                    file_new.write(htt)
-                    marks.append(separate[0])
-                else:
-                    file_new.write('\n' + htt)
+            # 判断返回的是不是数组
+            if type(htt) == list:
+                # 遍历数组的值
+                for li in htt:
+                    # 把htt分隔
+                    for i in li:
+                        separate = i.split('=')
+                        # 保证一行只能存在一个相同参数
+                        if separate[0] not in marks:
+                            file_new.write(i)
+                            marks.append(separate[0])
+                        else:
+                            file_new.write('\n' + i)
+                    # 执行结束换行
+                    file_new.write('\n')
         return marks
     except Exception as e:
         logger.write_log('re_htt 出错了: ' + str(e))
