@@ -41,6 +41,7 @@ def tx_revise():
                         continue
                     # 处理特殊数据直接获取ct
                     # 筛选非https开头和export开头的数据
+                    # 京东店铺签到
                     # 为了应付带空格的
                     for v in j.split('='):
                         for d in v.split(' '):
@@ -63,35 +64,31 @@ def tx_revise():
                     # 如果开头是export =后面有"https://则添加到文本中
                     if ex_ht:
                         ht = re_exht(file_new, ex_ht, marks)
-                        if ht == -1:
-                            # 跳过本次循环
-                            continue
-                        ft = 0
-                        # 把标记添加到数组中
-                        for k in range(len(ht)):
-                            marks.append(ht[k])
-                        continue
+                        if len(ht) > 0:
+                            ft = 0
+                            # 把标记添加到数组中
+                            for k in range(len(ht)):
+                                marks.append(ht[k])
+                            # continue
                     # 如果开头是export或https://开头 =后面没有"https://则添加到文本中
                     else:
                         if len(ex_tx) > 0:
                             tx = re_extx(file_new, ex_tx, marks)
-                            if tx == -1:
-                                continue
-                            ft = 0
-                            # 把标记添加到数组中
-                            for k in range(len(tx)):
-                                marks.append(tx[k])
-                            continue
-                        # 判断获取的ht_tx是否为空，如果不为空则进入,https的链接
-                        if len(ht_tx) > 0:
-                            htt = re_htt(file_new, ht_tx, marks)
-                            if htt == -1:
-                                continue
+                            if len(tx) > 0:
+                                ft = 0
+                                # 把标记添加到数组中
+                                for k in range(len(tx)):
+                                    marks.append(tx[k])
+                                # continue
+                    # 判断获取的ht_tx是否为空，如果不为空则进入,https的链接
+                    if len(ht_tx) > 0:
+                        htt = re_htt(file_new, ht_tx, marks)
+                        if len(htt) > 0:
                             ft = 0
                             # 把标记添加到数组中
                             for k in range(len(htt)):
                                 marks.append(htt[k])
-                            continue
+                            # continue
                 # 处理好一行后换行
                 if ft == 0:
                     file_new.write('\n')

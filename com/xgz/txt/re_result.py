@@ -10,7 +10,7 @@ def re_exht(file_new, exht, marks):
     :param file_new: 文件对象
     :param exht: 匹配到的内容
     :param marks: 去重用的标记
-    :return: 正常返回marks, 否则返回-1
+    :return: 正常返回数组, 否则返回[]
     """
     try:
         # 使用这个循环是防止有人不换行把内容都放在一行
@@ -37,7 +37,7 @@ def re_exht(file_new, exht, marks):
         return marks
     except Exception as e:
         logger.write_log('re_exht 出错了: ' + str(e))
-        return -1
+        return []
 
 
 def re_extx(file_new, extx, marks):
@@ -46,7 +46,7 @@ def re_extx(file_new, extx, marks):
     :param file_new: 文件对象
     :param extx: 文本内容
     :param marks: 去重用的标记
-    :return: 正常返回marks, 否则返回-1
+    :return: 正常返回数组, 否则返回[]
     """
     try:
         # 使用这个循环是防止有人不换行把内容都放在一行
@@ -68,7 +68,7 @@ def re_extx(file_new, extx, marks):
         return marks
     except Exception as e:
         logger.write_log('re_extx 出错了: ' + str(e))
-        return -1
+        return []
 
 
 def re_htt(file_new, httx, marks):
@@ -77,7 +77,7 @@ def re_htt(file_new, httx, marks):
     :param file_new: 文件对象
     :param httx: 匹配到的内容
     :param marks: 去重用的标记
-    :return: 正常返回marks, 否则返回-1
+    :return: 正常返回数组, 否则返回[]
     """
     try:
         # 使用这个循环是防止有人不换行把内容都放在一行
@@ -101,4 +101,4 @@ def re_htt(file_new, httx, marks):
         return marks
     except Exception as e:
         logger.write_log('re_htt 出错了: ' + str(e))
-        return -1
+        return []
