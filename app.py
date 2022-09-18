@@ -64,6 +64,7 @@ def data():
 if __name__ == '__main__':
     print('程序启动成功')
     scheduler.start()
+    jd_sql('jd_tk')
     data()
     mai()
     app.run(host='0.0.0.0', port=5000, debug=False)
