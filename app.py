@@ -3,6 +3,7 @@
 """
 import os
 import re
+import threading
 
 from flask import Flask
 from flask_apscheduler import APScheduler
@@ -58,13 +59,13 @@ def data():
     if pa:
         if not os.path.exists(pa[0]):  # 判断日志存储文件夹是否存在，不存在，则新建
             os.makedirs(pa[0])
+    scheduler.start()
+    jd_sql('jd_tk')
+    mai()
 
 
 # 主方法
 if __name__ == '__main__':
-    print('程序启动成功')
-    scheduler.start()
-    jd_sql('jd_tk')
-    data()
-    mai()
+    t1 = threading.Thread(target=mai, args=())
+    t1.start()
     app.run(host='0.0.0.0', port=5000, debug=False)
