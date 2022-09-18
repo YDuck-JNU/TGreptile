@@ -35,7 +35,7 @@ def tc():
 
 
 @scheduler.task('interval', id='mai', minutes=read_yaml()['time'])
-def mai():
+def tire():
     ts1 = tg_judge()
     # # 判断返回的值是否为非-1
     # # 获取时间用于判断
@@ -50,7 +50,7 @@ def mai():
         add_null()
 
 
-def data():
+def main():
     """
     如果没保存数据的文件则创建
     :return:
@@ -61,11 +61,11 @@ def data():
             os.makedirs(pa[0])
     scheduler.start()
     jd_sql('jd_tk')
-    mai()
+    tire()
 
 
 # 主方法
 if __name__ == '__main__':
-    t1 = threading.Thread(target=mai, args=())
+    t1 = threading.Thread(target=main, args=())
     t1.start()
     app.run(host='0.0.0.0', port=5000, debug=False)
