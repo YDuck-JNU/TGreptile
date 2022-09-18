@@ -8,6 +8,7 @@ from com.xgz.sql.JD_ql import select_data
 from com.xgz.sql.sign import to_select
 
 logger = LoggerClass('debug')
+yml = read_yaml()
 
 
 def tx_compared():
@@ -16,7 +17,8 @@ def tx_compared():
     :return: 返回数组的脚本名称[0]和变量[1],异常返回-1
     """
     try:
-        yml = read_yaml()
+        # 用来去重复
+        lis = []
         # 读取文件内容
         tx = read_txt(yml['path'])
         # 用来存储脚本名称和变量的
@@ -36,6 +38,11 @@ def tx_compared():
                     variable.append(yml['js'][0][1] + '=' + sessql)
 
         for i in tx:
+            # 判断是不是在数组中存在去重复处理
+            if i in lis and len(i) < 6:
+                continue
+            else:
+                lis.append(i)
             try:
                 # 切割字符串
                 if i[0:6:1] == 'export' or i[0:9:1] == 'NOTexport':
@@ -69,6 +76,8 @@ def tx_compared():
                     logger.write_log('数据库没有找到: ' + str(i))
             except Exception as e:
                 logger.write_log("你库中没有这个值: " + str(i))
+        # 清空数组
+        lis.clear()
         return [script, variable]
     except Exception as e:
         logger.write_log("tx_compared 异常信息: " + str(e))
@@ -83,8 +92,7 @@ def htm(js, va):
     :return:
     """
     try:
-        path = read_yaml()
-        pathtx = path['htmltx']
+        pathtx = yml['htmltx']
         # 打开并清空写入文件
         a_file = open(pathtx, "w+", encoding="utf-8")
         jsotx = {}
@@ -114,8 +122,7 @@ def add_null():
     :return:
     """
     try:
-        path = read_yaml()
-        pathtx = path['htmltx']
+        pathtx = yml['htmltx']
         a_file = open(pathtx, "w", encoding="utf-8")
         json.dump('{}', a_file)
         # log_ip("没有脚本名称和变量")
