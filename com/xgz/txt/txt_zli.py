@@ -60,7 +60,7 @@ def tx_revise():
                             # 跳过本次循环
                             continue
                     ex_ht = re.findall('.*?(export \w+="<a href="https://.*?")', j, re.S)
-                    ex_tx = re.findall(r'.*?(export \w+="?[A-Za-z0-9&]+"?)', j, re.S)
+                    ex_tx = re.findall(r'.*?(export \w+="?[A-Za-z0-9&_]+"?)', j, re.S)
                     ht_tx = re.findall(r'.*?href="(https://.*?)"', j, re.S)
 
                     # 如果开头是export =后面有"https://则添加到文本中
