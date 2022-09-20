@@ -66,7 +66,7 @@ def re_extx(file_new, extx, marks):
             else:
                 # 如果存在相同参数,则在写入文本前加上\n
                 file_new.write('\n' + export_txt(ext))
-        file_new.write('\n')
+        # file_new.write('\n')
         return marks
     except Exception as e:
         logger.write_log('re_extx 出错了: ' + str(e))
