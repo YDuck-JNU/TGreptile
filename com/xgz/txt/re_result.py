@@ -33,6 +33,7 @@ def re_exht(file_new, exht, marks):
             else:
                 # 如果存在相同参数,则在写入文本前加上\n
                 file_new.write('\n' + export_https(exhtx))
+        file_new.write('\n')
         # 把带参数用于标记
         return marks
     except Exception as e:
@@ -65,6 +66,7 @@ def re_extx(file_new, extx, marks):
             else:
                 # 如果存在相同参数,则在写入文本前加上\n
                 file_new.write('\n' + export_txt(ext))
+        file_new.write('\n')
         return marks
     except Exception as e:
         logger.write_log('re_extx 出错了: ' + str(e))
@@ -98,6 +100,7 @@ def re_htt(file_new, httx, marks):
                             file_new.write('\n' + i)
                     # 执行结束换行
                     file_new.write('\n')
+        file_new.write('\n')
         return marks
     except Exception as e:
         logger.write_log('re_htt 出错了: ' + str(e))

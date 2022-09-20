@@ -39,7 +39,7 @@ def tx_compared():
 
         for i in tx:
             # 判断是不是在数组中存在去重复处理
-            if i in lis or len(i) < 6:
+            if i in lis:
                 continue
             else:
                 lis.append(i)
