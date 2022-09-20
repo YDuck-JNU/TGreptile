@@ -28,8 +28,12 @@ def qlrz():
 
 @app.route("/sql", methods=['GET', 'POST'])
 def sql():
-    name = select_data()
-    return render_template('hello.html', name=name)
+    if request.method == 'GET':
+        name = select_data()
+        return render_template('hello.html', name=name)
+    else:
+        name = select_data()
+        return name
 
 
 @app.route('/renew', methods=['GET', 'POST'])
