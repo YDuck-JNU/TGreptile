@@ -60,8 +60,8 @@ def main():
         if not os.path.exists(pa[0]):  # 判断日志存储文件夹是否存在，不存在，则新建
             os.makedirs(pa[0])
     scheduler.start()
-    jd_sql('jd_tk')
     tire()
+    jd_sql('jd_tk')
 
 
 # 主方法
