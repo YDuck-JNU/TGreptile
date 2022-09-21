@@ -11,7 +11,7 @@ htmltx: './com/data/ql_data.json'
 # 日志存储路径，[普通日志]
 log: './log/tg.log'
 # 设置程序多久执行一次,分钟
-time: 600
+time: 3
 # 设置误差秒数
 error: 300
 # 设置数据库
