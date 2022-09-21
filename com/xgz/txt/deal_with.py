@@ -37,7 +37,7 @@ def export_https(exht):
             # else:
             #     logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
         # 把两端重新拼接并且返回
-        return separate[0] + "\"" + separate[1] + "\" "
+        return separate[0] + '"' + separate[1] + '"'
     except Exception as e:
         logger.write_log("export_https，异常问题: " + str(e))
         return -1
@@ -63,7 +63,7 @@ def export_txt(extx):
             # 获取设置得正则表达式
             separate[0] = 'NOT' + separate[0]
         # 把两端重新拼接并且返回
-        return str(separate[0]) + "=\"" + str(separate[1]) + "\" "
+        return str(separate[0]) + '="' + str(separate[1]) + '"'
     except Exception as e:
         logger.write_log("export_txt，异常问题: " + str(e))
         return -1
