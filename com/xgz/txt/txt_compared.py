@@ -39,10 +39,10 @@ def tx_compared():
 
         for i in tx:
             # 判断是不是在数组中存在去重复处理
-            if i in lis:
-                continue
-            else:
+            if not i in lis and len(i) > 7:
                 lis.append(i)
+            else:
+                continue
             try:
                 # 切割字符串
                 if i[0:6:1] == 'export' or i[0:9:1] == 'NOTexport':
