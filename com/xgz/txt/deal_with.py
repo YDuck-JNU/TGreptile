@@ -102,6 +102,8 @@ def https_txt(http):
                             lis.append([ink[1] + '="' + htt3[0] + '"'])
                     else:
                         logger.write_log("https_txt,正则表达式没有匹配到值:  " + str(http))
+                else:
+                    logger.write_log("https_txt,正则表达式没有匹配到值:  " + str(http))
             # 如果有值返回数组,没有返回-1
             return lis if len(lis) != '' else -1
         return -1
