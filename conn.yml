@@ -1,5 +1,5 @@
 # 添加TG频道的名称
-url: ['XGZno','KingRan521','wondertemple', 'TumblrWireReport', 'HarbourToulu','TopStyle2021', 'mihuc_bot', 'jdsharing','qiyueyichat', 'platypus_notice', 'okyydsnb', 'proenvc', 'jdrain', 'fdd_JSB', 'spy_lu_channel', 'Wall_E_Channel']
+url: ['XGZno']#,'KingRan521','wondertemple', 'TumblrWireReport', 'HarbourToulu','TopStyle2021', 'mihuc_bot', 'jdsharing','qiyueyichat', 'platypus_notice', 'okyydsnb', 'proenvc', 'jdrain', 'fdd_JSB', 'spy_lu_channel', 'Wall_E_Channel']
 # 浏览器获取的cookie
 cookie: 'stel_on=1; stel_dt=-480; stel_ssid=f701f58d6fbc1f94eb_10039440616051837871'
 # web端使用端口，如果修改，需要修改tg.yml文件中的端口
@@ -11,9 +11,9 @@ htmltx: './com/data/ql_data.json'
 # 日志存储路径，[普通日志]
 log: './log/tg.log'
 # 设置程序多久执行一次,分钟
-time: 3
+time: 600
 # 设置误差秒数
-error: 30
+error: 300
 # 设置数据库
 db: ./com/xgz/sql/db.sqlite
 # 是否设置代理
@@ -28,9 +28,9 @@ acting:
   - type: 10809
 # 针对特殊脚本的设置,NOT是告诉子段这个不去重
 js:
-  - [ 'jd_shopqd.js', 'NOTexport DPQDTK', '00:06' ]
+  - [ 'jd_shopqd.js', 'NOTexport DPQDTK', '00:03' ]
 # 黑名单
-black: ['221.124.250.54']
+black: ['221.124.250.54','3.38.184.63']
 # 用于记录行
 Label:
   time: 14
