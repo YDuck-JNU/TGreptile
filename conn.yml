@@ -13,7 +13,7 @@ log: './log/tg.log'
 # 设置程序多久执行一次,分钟
 time: 3
 # 设置误差秒数
-error: 300
+error: 30
 # 设置数据库
 db: ./com/xgz/sql/db.sqlite
 # 是否设置代理
