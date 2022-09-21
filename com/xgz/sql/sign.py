@@ -73,7 +73,7 @@ def to_select(value='*'):
         data = cursor.fetchall()
         return data
     except Exception as e:
-        return 1
+        return []
     finally:
         # 关闭数据库
         db.close()

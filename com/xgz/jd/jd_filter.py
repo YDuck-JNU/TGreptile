@@ -33,7 +33,7 @@ def jd_sql(txt=None):
         # 检查str1是否为空
         if str1 != '':
             # 如果不为空，则去掉最后一个&
-            return "\"" + str1[:-1] + "\""
+            return '"' + str1[:-1] + '"'
         else:
             return -1
     except Exception as e:
