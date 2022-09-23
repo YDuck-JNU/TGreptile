@@ -10,5 +10,9 @@ def update_time(time):
     修改爬虫爬取时间
     :return:
     """
-    revise_yaml(f'time: {time}', yam['Label']['time'])
-    os.system("kill -9 $(netstat -nlp | grep :5000 | awk '{print $7}' | awk -F'/' '{ print $1 }')")
+    try:
+        if type(time) == int:
+            revise_yaml(f'time: {time}', yam['Label']['time'])
+            os.system("kill -9 $(netstat -nlp | grep :5000 | awk '{print $7}' | awk -F'/' '{ print $1 }')")
+    except Exception as e:
+        print("修改时间异常信息", e)
