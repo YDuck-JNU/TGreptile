@@ -19,7 +19,7 @@ db: ./com/xgz/sql/db.sqlite
 # 是否设置代理
 acting:
   # 0 表示启用代理，1表示不启用代理
-  - enable: 0
+  - enable: 1
   # 代理类型，http代理 socks代理
   - proxy: http
     # 代理地址
