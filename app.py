@@ -25,7 +25,7 @@ scheduler = APScheduler()
 yml = read_yaml()
 
 
-@scheduler.task('interval', id='tk', hours=12)
+@scheduler.task('interval', id='tk', hours=24)
 def tc():
     """
     店铺签到tk定时检测
