@@ -47,7 +47,7 @@ def tx_revise():
                     # 为了应付带空格的
                     for v in j.split('='):
                         for d in v.split(' '):
-                            jd_tx = re.findall(r'(?!https:|export)([a-zA-Z0-9]{30,40})', d, re.S)
+                            jd_tx = re.findall(r'^(?!https:|export)([a-zA-Z0-9]{30,40})$', d, re.S)
                             if len(jd_tx) > 0 and jd_tx[0] not in '_' and jd_tx[0] not in 'jd':
                                 insert = to_insert(jd_tx[0])
                                 if insert[0] == -1:
