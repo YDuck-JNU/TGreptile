@@ -35,12 +35,12 @@ def tx_revise():
                 for j in line:
                     # 把一些值转换
                     j = j.replace('&quot;', '"').replace('&amp;', '&')
-                    # 处理特殊数据
-                    jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
-                    if len(jdht) > 0:
-                        # logger.write_log('活动链接手动添加: ' + str(j))
-                        # 跳过本次循环
-                        continue
+                    # 处理特殊数据，启用
+                    # jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
+                    # if len(jdht) > 0:
+                    #     # logger.write_log('活动链接手动添加: ' + str(j))
+                    #     # 跳过本次循环
+                    #     continue
                     # 处理特殊数据直接获取ct
                     # 筛选非https开头和export开头的数据
                     # 京东店铺签到

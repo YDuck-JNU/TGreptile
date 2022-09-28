@@ -1,5 +1,5 @@
 # 添加TG频道的名称
-url: ['XGZno','JUwot', 'KingRan521','wondertemple', 'HarbourToulu','TopStyle2021', 'mihuc_bot', 'jdsharing', 'okyydsnb', 'proenvc', 'jdrain', 'fdd_JSB', 'spy_lu_channel', 'Wall_E_Channel']
+url: ['XGZno','JUwot', 'KingRan521','wondertemple', 'LH_notify', 'HarbourToulu','TopStyle2021', 'mihuc_bot', 'jdsharing', 'okyydsnb', 'proenvc', 'jdrain', 'fdd_JSB', 'spy_lu_channel', 'Wall_E_Channel']
 # 浏览器获取的cookie
 cookie: 'stel_on=1; stel_dt=-480; stel_ssid=f701f58d6fbc1f94eb_10039440616051837871'
 # web端使用端口，如果修改，需要修改tg.yml文件中的端口

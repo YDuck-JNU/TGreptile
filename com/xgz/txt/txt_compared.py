@@ -32,10 +32,13 @@ def tx_compared():
             sesql = to_select()
             if len(sesql) > 0:
                 sessql = jd_sql()
-                # 不等于-1说明有数据
-                if sessql != -1:
+                for i in sessql:
                     script.append(yml['js'][0][0])
-                    variable.append(yml['js'][0][1] + '=' + sessql)
+                    variable.append(yml['js'][0][1] + '="' + i + '"')
+                # 不等于-1说明有数据
+                # if sessql != -1:
+                #     script.append(yml['js'][0][0])
+                #     variable.append(yml['js'][0][1] + '=' + sessql)
 
         for i in tx:
             # 判断是不是在数组中存在去重复处理
