@@ -61,7 +61,7 @@ def tx_revise():
                             continue
                     ex_ht = re.findall('.*?(export [0-9a-zA-Z_]+="(?:<a href=")?https://.*?")', j, re.S)
                     ex_tx = re.findall(r'.*?(export [0-9a-zA-Z_]+="?[A-Za-z0-9&]+"?)', j, re.S)
-                    ht_tx = re.findall(r'(https://.*)"', j, re.S)
+                    ht_tx = re.findall(r'(https://.*?)"', j, re.S)
                     # 如果开头是export =后面有"https://则添加到文本中
                     if ex_ht:
                         ht = re_exht(file_new, ex_ht, marks)
