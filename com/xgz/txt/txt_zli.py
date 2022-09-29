@@ -1,4 +1,5 @@
 import re
+from urllib import parse
 
 from com.xgz.gheaders.conn import read_txt, read_yaml
 from com.xgz.gheaders.log import LoggerClass
@@ -33,14 +34,13 @@ def tx_revise():
                 line = i.split('<br/>')
                 # 同行内容循环
                 for j in line:
-                    # 把一些值转换
-                    j = j.replace('&quot;', '"').replace('&amp;', '&')
+                    j = parse.unquote(j)
                     # 处理特殊数据，启用
-                    # jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
-                    # if len(jdht) > 0:
-                    #     # logger.write_log('活动链接手动添加: ' + str(j))
-                    #     # 跳过本次循环
-                    #     continue
+                    jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
+                    if len(jdht) > 0:
+                        # logger.write_log('活动链接手动添加: ' + str(j))
+                        # 跳过本次循环
+                        continue
                     # 处理特殊数据直接获取ct
                     # 筛选非https开头和export开头的数据
                     # 京东店铺签到
@@ -59,10 +59,9 @@ def tx_revise():
                                 logger.write_log('插入成功 ' + str(jd_tx[0]))
                             # 跳过本次循环
                             continue
-                    ex_ht = re.findall('.*?(export \w+="<a href="https://.*?")', j, re.S)
-                    ex_tx = re.findall(r'.*?(export \w+="?[A-Za-z0-9&_]+"?)', j, re.S)
-                    ht_tx = re.findall(r'.*?href="(https://.*?)"', j, re.S)
-
+                    ex_ht = re.findall('.*?(export [0-9a-zA-Z_]+="<a href="https://.*?")', j, re.S)
+                    ex_tx = re.findall(r'.*?(export [0-9a-zA-Z_]+="?[A-Za-z0-9&]+"?)', j, re.S)
+                    ht_tx = re.findall(r'>(https://.*?)<', j, re.S)
                     # 如果开头是export =后面有"https://则添加到文本中
                     if ex_ht:
                         ht = re_exht(file_new, ex_ht, marks)
@@ -71,17 +70,17 @@ def tx_revise():
                             # 把标记添加到数组中
                             for k in range(len(ht)):
                                 marks.append(ht[k])
-                            # continue
+                        # continue
                     # 如果开头是export或https://开头 =后面没有"https://则添加到文本中
-                    else:
-                        if len(ex_tx) > 0:
+                    elif ex_tx:
+                        if len(ex_tx[0].split('=')[-1]) > 7:
                             tx = re_extx(file_new, ex_tx, marks)
                             if len(tx) > 0:
                                 ft = 0
                                 # 把标记添加到数组中
                                 for k in range(len(tx)):
                                     marks.append(tx[k])
-                                # continue
+                                    # continue
                     # 判断获取的ht_tx是否为空，如果不为空则进入,https的链接
                     if len(ht_tx) > 0:
                         htt = re_htt(file_new, ht_tx, marks)

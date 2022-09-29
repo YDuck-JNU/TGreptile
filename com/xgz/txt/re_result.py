@@ -100,7 +100,7 @@ def re_htt(file_new, httx, marks):
                             file_new.write('\n' + i)
                     # 执行结束换行
                     file_new.write('\n')
-        file_new.write('\n')
+        # file_new.write('\n')
         return marks
     except Exception as e:
         logger.write_log('re_htt 出错了: ' + str(e))

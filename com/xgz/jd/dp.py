@@ -10,7 +10,6 @@ def shop_sign(token):
     :param token:
     :return: 返回状态码
     """
-    print(token)
     url = 'https://api.m.jd.com/api?appid=interCenter_shopSign&t=' + str(
         time.time()) + '&loginType=2&functionId=interact_center_shopSign_getActivityInfo&body={%22token%22:%22' + token + '%22,%22venderId%22:%22%22}&jsonp=jsonp1000',
     header = {
