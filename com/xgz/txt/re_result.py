@@ -15,18 +15,11 @@ def re_exht(file_new, exht, marks):
     try:
         # 使用这个循环是防止有人不换行把内容都放在一行
         for exhtx in exht:
-            exhtx = exhtx.replace('%3D', '=')
-            exhtx = exhtx.replace('%22', '"')
-            exhtx = exhtx.replace('%20', ' ')
-            exhtx = exhtx.replace('%3A', ':')
-            exhtx = exhtx.replace('%3F', '?')
-            exhtx = exhtx.replace('%26', '&')
             # 把exht分隔
             separate = exhtx.split('=')
             # print(separate)
             # 保证一行只能存在一个相同参数
             if separate[0] not in marks:
-
                 # 把带 export 后面是链接的直接写入文本
                 file_new.write(export_https(exhtx))
                 marks.append(separate[0])

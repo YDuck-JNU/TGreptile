@@ -17,27 +17,32 @@ def export_https(exht):
     :return: 处理后的行，异常返回-1
     """
     try:
-        # 把exht分隔，去除中间的"<a href=
-        separate = exht.split('"<a href=')
-        # separate[1]去除前后的"
-        separate[1] = separate[1].replace('"', '')
-        # 去掉最后的/,如果是链接抓取到的会自动带最后/，但是参数不需要/
-        separate[1] = separate[1].rstrip('/')
-        # 下面是修改活动参数,调用数据库的正则表达式
-        va = separate[0].strip('=')
-        sq = select_data(data='jd_re', value=f'jd_value1="{va}"')
-        # 如果等于0表示没有查询到
-        if len(sq) > 0:
-            # 获取设置得正则表达式
-            separ = re.findall(f'{sq[0][0]}', separate[1])
-            if len(separ) == 1:
-                separate[1] = separ[0]
-            # elif len(separ) > 1:
-            #     logger.write_log(f"问题值 : {separate[1]} <br> 正则表达式: {sq[0][0]}")
-            # else:
-            #     logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
-        # 把两端重新拼接并且返回
-        return separate[0] + '"' + separate[1] + '"'
+        # 用来区分有没有"<a href=
+        hre = re.findall('"<a href=',exht)
+        if hre:
+            # 把exht分隔，去除中间的"<a href=
+            separate = exht.split('"<a href=')
+            # separate[1]去除前后的"
+            separate[1] = separate[1].replace('"', '')
+            # 去掉最后的/,如果是链接抓取到的会自动带最后/，但是参数不需要/
+            separate[1] = separate[1].rstrip('/')
+            # 下面是修改活动参数,调用数据库的正则表达式
+            va = separate[0].strip('=')
+            sq = select_data(data='jd_re', value=f'jd_value1="{va}"')
+            # 如果等于0表示没有查询到
+            if len(sq) > 0:
+                # 获取设置得正则表达式
+                separ = re.findall(f'{sq[0][0]}', separate[1])
+                if len(separ) == 1:
+                    separate[1] = separ[0]
+                # elif len(separ) > 1:
+                #     logger.write_log(f"问题值 : {separate[1]} <br> 正则表达式: {sq[0][0]}")
+                # else:
+                #     logger.write_log(f'此只有正则表达式，但是没用获取到 {separate[0]} = {separate[1]}')
+            # 把两端重新拼接并且返回
+            return separate[0] + '"' + separate[1] + '"'
+        else:
+            return exht
     except Exception as e:
         logger.write_log("export_https，异常问题: " + str(e))
         return -1
