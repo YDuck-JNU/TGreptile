@@ -101,7 +101,6 @@ def to_delete(value):
         # 关闭数据库
         return 0
     except Exception as e:
-        return 1
+        return e
     finally:
         db.close()
-

@@ -10,7 +10,6 @@ from flask_apscheduler import APScheduler
 
 from com.xgz.gheaders.conn import read_yaml
 from com.xgz.gheaders.ti import fast_forward
-from com.xgz.jd.jd_filter import jd_sql
 from com.xgz.tg.getTG import tg_judge
 from com.xgz.txt.txt_compared import txt_main, add_null
 from com.xgz.txt.txt_zli import tx_revise
@@ -23,15 +22,6 @@ app.register_blueprint(add.app, url_prefix='/sql')
 # 下面是定时任务
 scheduler = APScheduler()
 yml = read_yaml()
-
-
-@scheduler.task('interval', id='tk', hours=24)
-def tc():
-    """
-    店铺签到tk定时检测
-    :return:
-    """
-    jd_sql('jd_tk')
 
 
 @scheduler.task('interval', id='mai', minutes=read_yaml()['time'])
@@ -61,7 +51,6 @@ def main():
             os.makedirs(pa[0])
     scheduler.start()
     tire()
-    jd_sql('jd_tk')
 
 
 # 主方法

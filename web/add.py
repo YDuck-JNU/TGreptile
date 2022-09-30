@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template
 
 from com.xgz.sql.JD_ql import select_data, insert_data, delete_one_data
+from com.xgz.sql.sign import to_delete
 
 app = Blueprint('sql', __name__)
 
@@ -56,3 +57,20 @@ def dele():
             return str1 + "删除失败"
     else:
         return render_template('del.html')
+
+
+@app.route('/delt', methods=['GET', 'POST'])
+def delt():
+    if request.method == 'POST':
+        str1 = ''
+        t = request.form.get('t')
+        if t:
+            tk = to_delete(t)
+            if tk != 0:
+                str1 += str(t) + "删除失败 异常是" + str(tk) + '<br>'
+        if len(str1) == 0:
+            return "删除成功"
+        else:
+            return str1 + "删除失败"
+    else:
+        return render_template('delt.html')

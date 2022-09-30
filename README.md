@@ -7,6 +7,7 @@
 /sql 数据库
 /sql/add 添加
 /sql/del 删除
+/sql/delt 删除店铺tk
 ```
 ```shell
 docker run -dit \
@@ -24,4 +25,5 @@ docker run -dit \
 会获取变量里面的HTTPS链接再自己转换,子端因为有去重复处理暂时不考虑去重复
 对本次值进行去重复处理
 添加post数据库接口 /sql
+取消了店铺签到的定时检测改用手动删除
 ```
