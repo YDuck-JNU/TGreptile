@@ -59,9 +59,9 @@ def tx_revise():
                                 logger.write_log('插入成功 ' + str(jd_tx[0]))
                             # 跳过本次循环
                             continue
-                    ex_ht = re.findall('.*?(export [0-9a-zA-Z_]+="(?:<a href=")?https://.*?")', j, re.S)
+                    ex_ht = re.findall('.*?(export [0-9a-zA-Z_]+="(?:<a href=")?https://.*?&?.*?")', j, re.S)
                     ex_tx = re.findall(r'.*?(export [0-9a-zA-Z_]+="?[A-Za-z0-9&_]+"?)', j, re.S)
-                    ht_tx = re.findall(r'(https://.*_?)"', j, re.S)
+                    ht_tx = re.findall(r'(https://.*?&?.*?)"', j, re.S)
                     # 如果开头是export =后面有"https://则添加到文本中
                     if ex_ht:
                         ht = re_exht(file_new, ex_ht, marks)
