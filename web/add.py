@@ -11,8 +11,6 @@ def register():
     # id, jd_name, jd_js, jd_value1, jd_value2=None, jd_value3=None, jd_url=None, jd_re=None
     if request.method == 'POST':
         id = select_data()
-        print("获取ID", id)
-        print('===================================')
         jd_name = request.form.get('jd_name')
         jd_js = request.form.get('jd_js')
         jd_value1 = request.form.get('jd_value1')
@@ -28,7 +26,6 @@ def register():
                 sun += 1
         if sun == len(id) and sun != 0:
             sun += 1
-        print(sun)
         # 开始校验是否符合要求
         if jd_name != '' and jd_js != '' and jd_value1 != '':
             sql = insert_data(sun, jd_name, jd_js, jd_value1, jd_value2, jd_value3, jd_url, jd_re)

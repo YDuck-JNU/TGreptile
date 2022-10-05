@@ -19,6 +19,9 @@ app = Flask(__name__)
 
 app.register_blueprint(web.app, url_prefix='/')
 app.register_blueprint(add.app, url_prefix='/sql')
+app._static_folder = "./templates/"
+# 给这个网站设置密钥
+app.config['SECRET_KEY'] = 'AHTKFJYTJddyktu56587970'
 # 下面是定时任务
 scheduler = APScheduler()
 yml = read_yaml()

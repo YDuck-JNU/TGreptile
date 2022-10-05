@@ -34,7 +34,7 @@ def tx_revise():
                 line = i.split('<br/>')
                 # 同行内容循环
                 for j in line:
-                    j = parse.unquote(j).replace('&quot;', '"')
+                    j = parse.unquote(j).replace('&quot;', '"').replace('&amp;', "&")
                     # 处理特殊数据，启用
                     jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
                     if len(jdht) > 0:

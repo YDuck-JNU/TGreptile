@@ -21,9 +21,13 @@ def qlcs():
         return read_yaml(ql['htmltx'])
 
 
-@app.route("/log", methods=['GET', 'POST'])
-def qlrz():
-    return rz()
+@app.route('/log', methods=['GET'])
+def log():
+    """
+    日志
+    :return:
+    """
+    return render_template('log.html', rz=rz())
 
 
 @app.route("/sql", methods=['GET', 'POST'])
@@ -43,8 +47,7 @@ def renew():
 
 
 @app.route("/", methods=['GET', 'POST'])
-def index():
-    # print(request.environ['REMOTE_ADDR'])
+def ine():
     if request.method == 'POST':
         urls = request.form.get('url')
         update_time(urls)
