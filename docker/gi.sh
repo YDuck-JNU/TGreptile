@@ -1,5 +1,6 @@
 # shellcheck disable=SC2164
-if [ -d "/TGreptile" ];then
+if [ -d "/TGreptile" ]
+then
   cd /TGreptile
   git fetch --all
   git reset --hard

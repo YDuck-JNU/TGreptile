@@ -1,4 +1,5 @@
 import re
+from urllib import parse
 
 import requests
 
@@ -81,9 +82,10 @@ def re_filter(path, te_text):
                 # print("慢时间：" + times[0])
                 # 对比时间，如果时间大于等于上次的时间就获取数据
                 if times[2] >= ti1 >= times[0]:
+                    text = parse.unquote(tes[0]).replace('&quot;', '"').replace('&amp;', "&")
                     # 写入文件把所有&quot;替换成"
-                    logger.write_log("添加: " + str(tes[0]) + " 内容成功")
-                    f.write(tes[0].replace("&quot;", "\"") + '\n')
+                    logger.write_log("添加: " + text + " 内容成功")
+                    f.write(text + '\n')
                 else:
                     # 因为是倒序所以如果时间小于规定的时间就结束
                     f.close()

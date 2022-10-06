@@ -1,5 +1,4 @@
 import re
-from urllib import parse
 
 from com.xgz.gheaders.conn import read_txt, read_yaml
 from com.xgz.gheaders.log import LoggerClass
@@ -34,11 +33,11 @@ def tx_revise():
                 line = i.split('<br/>')
                 # 同行内容循环
                 for j in line:
-                    j = parse.unquote(j).replace('&quot;', '"').replace('&amp;', "&")
+                    # j = parse.unquote(j).replace('&quot;', '"').replace('&amp;', "&")
                     # 处理特殊数据，启用
                     jdht = re.findall(r'.*?href="(https://u\.jd\.com/.*?)"', j, re.S)
                     if len(jdht) > 0:
-                        # logger.write_log('活动链接手动添加: ' + str(j))
+                        logger.write_log('活动链接手动添加: ' + str(i))
                         # 跳过本次循环
                         continue
                     # 处理特殊数据直接获取ct

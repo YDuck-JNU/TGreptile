@@ -1,5 +1,6 @@
 #!/bin/sh
-if [ -d "/TGreptile" ];then
+if [ -d "/TGreptile" ]
+then
   cd /TGreptile || exit
 else
   echo "检测到文件不存在拉取新项目"
@@ -15,7 +16,8 @@ do
     # shellcheck disable=SC2009
     # shellcheck disable=SC2126
     stillRunning=$(ps -ef |grep app.py  |grep -v "grep" |wc -l)
-    if [ "$stillRunning" ]; then
+    if [ "$stillRunning" ]
+    then
       echo 程序死亡开始执行
        cd /TGreptile && python3 app.py
     else
