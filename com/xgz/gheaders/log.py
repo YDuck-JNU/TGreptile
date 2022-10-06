@@ -150,16 +150,10 @@ def rz():
             j = re.findall(r"\[\d+m(.*)\x1b", i)
             if j:
                 # 处理一些其他内容
-                ss = j[0].replace('<br/>', '\t')
+                ss = j[0].replace('<br/>', '\t').replace('</a>', '').replace('</b>', '').replace('</a>', '').replace('<b>', '').replace('</i>', '').replace('<code>', '').replace('</code>', '')
                 tet1 = re.split(r'<a href="https://.*?" target="_blank" rel="noopener">', ss)
-                if len(tet1) > 1:
-                    st.append(''.join(tet1).replace('</a>', ''))
-                    continue
-                tet1 = re.split(r'<i class="emoji" style="background-image:url\(\'//telegram\.org/img/emoji/.*?\)"><b>.*?</b></i>', ss)
-                if len(tet1) > 1:
-                    st.append(''.join(tet1).replace('</b>', '').replace('</a>', '').replace('<b>', ''))
-                    continue
-                st.append(j[0])
+                tet1 = re.split(r'<i class="emoji" style="background-image:url\(\'//telegram\.org/img/emoji/.*?\)">(?!<b>.*?</b></i>)?', ''.join(tet1))
+                st.append(''.join(tet1))
                 continue
         return st
     except Exception as e:
