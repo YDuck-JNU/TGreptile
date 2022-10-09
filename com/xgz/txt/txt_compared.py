@@ -46,41 +46,36 @@ def tx_compared():
                 lis.append(i)
             else:
                 continue
-            try:
-                # 切割字符串
-                if i[0:6:1] == 'export' or i[0:9:1] == 'NOTexport':
-                    # 把export DPLHTY="b4be"的键和值分开
-                    tx = i.split('=')
-                    # 先查询这个值在不在jd_value1中
-                    value1 = select_data('jd_js', f'jd_value1="{tx[0]}"')
-                    value2 = select_data('jd_js', f'jd_value2="{tx[0]}"')
-                    value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
-                    if len(value1) == 0 and 0 == len(value2) and len(value3) == 0:
-                        logger.write_log('数据库没有找到: ' + str(i))
-                        continue
-                    if len(value1) > 0:
-                        # 下面是js和名称
-                        script.append(value1[0][0])
-                        variable.append(i)
-                        # 跳过本次执行
-                        continue
-                    # 再查询这个值在不在jd_value2中
-                    if len(value2) > 0:
-                        # 下面是js和名称
-                        script.append(value2[0][0])
-                        variable.append(i)
-                        # 跳过本次执行
-                        continue
-                    # 再查询这个值在不在jd_value3中
-                    if len(value3) > 0:
-                        # 下面是js和名称
-                        script.append(value3[0][0])
-                        variable.append(i)
-                        # 跳过本次执行
-                        continue
-
-            except Exception as e:
-                logger.write_log("你库中没有这个值: " + str(i))
+            # 切割字符串
+            if i[0:6:1] == 'export' or i[0:9:1] == 'NOTexport':
+                # 把export DPLHTY="b4be"的键和值分开
+                tx = i.split('=')
+                # 先查询这个值在不在jd_value1中
+                value1 = select_data('jd_js', f'jd_value1="{tx[0]}"')
+                if len(value1) > 0:
+                    # 下面是js和名称
+                    script.append(value1[0][0])
+                    variable.append(i)
+                    # 跳过本次执行
+                    continue
+                # 再查询这个值在不在jd_value2中
+                value2 = select_data('jd_js', f'jd_value2="{tx[0]}"')
+                if len(value2) > 0:
+                    # 下面是js和名称
+                    script.append(value2[0][0])
+                    variable.append(i)
+                    # 跳过本次执行
+                    continue
+                # 再查询这个值在不在jd_value3中
+                value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
+                if len(value3) > 0:
+                    # 下面是js和名称
+                    script.append(value3[0][0])
+                    variable.append(i)
+                    # 跳过本次执行
+                    continue
+                i = i.replace('\n', '')
+                logger.write_log(f'数据库没有找到: {i}')
         # 清空数组
         lis.clear()
         return [script, variable]
