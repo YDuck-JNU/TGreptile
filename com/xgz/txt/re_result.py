@@ -1,5 +1,5 @@
 from com.xgz.gheaders.log import LoggerClass
-from com.xgz.txt.deal_with import export_https, export_txt, https_txt
+from com.xgz.txt.deal_with import export_txt, https_txt
 
 logger = LoggerClass('debug')
 
@@ -21,11 +21,11 @@ def re_exht(file_new, exht, marks):
             # 保证一行只能存在一个相同参数
             if separate[0] not in marks:
                 # 把带 export 后面是链接的直接写入文本
-                file_new.write(export_https(exhtx))
+                file_new.write(exhtx)
                 marks.append(separate[0])
             else:
                 # 如果存在相同参数,则在写入文本前加上\n
-                file_new.write('\n' + export_https(exhtx))
+                file_new.write('\n' + exhtx)
         file_new.write('\n')
         # 把带参数用于标记
         return marks

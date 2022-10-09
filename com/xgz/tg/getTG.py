@@ -83,9 +83,12 @@ def re_filter(path, te_text):
                 # 对比时间，如果时间大于等于上次的时间就获取数据
                 if times[2] >= ti1 >= times[0]:
                     text = parse.unquote(tes[0]).replace('&quot;', '"').replace('&amp;', "&")
+                    ss = text.replace('<br/>', '\t').replace('</a>', '').replace('</b>', '').replace('</a>','').replace('<b>','').replace('</i>', '').replace('<code>', '').replace('</code>', '')
+                    tet1 = re.split(r'<a href="https?://.*?" target="_blank" rel="noopener">', ss)
+                    tet1 = re.split(r'<i class="emoji" style="background-image:url\(\'//telegram\.org/img/emoji/.*?\)">(?!<b>.*?</b></i>)?',''.join(tet1))
                     # 写入文件把所有&quot;替换成"
-                    logger.write_log("添加: " + text + " 内容成功")
-                    f.write(text + '\n')
+                    logger.write_log("添加: " + ''.join(tet1) + " 内容成功")
+                    f.write(''.join(tet1) + '\n')
                 else:
                     # 因为是倒序所以如果时间小于规定的时间就结束
                     f.close()
