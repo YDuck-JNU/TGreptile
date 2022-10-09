@@ -53,6 +53,11 @@ def tx_compared():
                     tx = i.split('=')
                     # 先查询这个值在不在jd_value1中
                     value1 = select_data('jd_js', f'jd_value1="{tx[0]}"')
+                    value2 = select_data('jd_js', f'jd_value2="{tx[0]}"')
+                    value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
+                    if len(value1) == len(value2) == len(value2) == 0:
+                        logger.write_log('数据库没有找到: ' + str(i))
+                        continue
                     if len(value1) > 0:
                         # 下面是js和名称
                         script.append(value1[0][0])
@@ -60,7 +65,6 @@ def tx_compared():
                         # 跳过本次执行
                         continue
                     # 再查询这个值在不在jd_value2中
-                    value2 = select_data('jd_js', f'jd_value2="{tx[0]}"')
                     if len(value2) > 0:
                         # 下面是js和名称
                         script.append(value2[0][0])
@@ -68,7 +72,6 @@ def tx_compared():
                         # 跳过本次执行
                         continue
                     # 再查询这个值在不在jd_value3中
-                    value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
                     if len(value3) > 0:
                         # 下面是js和名称
                         script.append(value3[0][0])
@@ -76,7 +79,7 @@ def tx_compared():
                         # 跳过本次执行
                         continue
                     # 表示没有找到
-                    logger.write_log('数据库没有找到: ' + str(i))
+
             except Exception as e:
                 logger.write_log("你库中没有这个值: " + str(i))
         # 清空数组
