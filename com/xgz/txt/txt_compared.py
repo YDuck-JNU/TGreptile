@@ -55,7 +55,7 @@ def tx_compared():
                     value1 = select_data('jd_js', f'jd_value1="{tx[0]}"')
                     value2 = select_data('jd_js', f'jd_value2="{tx[0]}"')
                     value3 = select_data('jd_js', f'jd_value3="{tx[0]}"')
-                    if len(value1) == len(value2) == len(value2) == 0:
+                    if len(value1) == 0 and 0 == len(value2) and len(value3) == 0:
                         logger.write_log('数据库没有找到: ' + str(i))
                         continue
                     if len(value1) > 0:
@@ -78,7 +78,6 @@ def tx_compared():
                         variable.append(i)
                         # 跳过本次执行
                         continue
-                    # 表示没有找到
 
             except Exception as e:
                 logger.write_log("你库中没有这个值: " + str(i))
