@@ -23,7 +23,7 @@ def jd_sql(txt=None):
         sun = 1
         # 循环查询结果
         for i in sesql:
-            if sun != 8:
+            if sun != 15:
                 # 把i[0]拼接到str1中
                 st += i[0] + '&'
                 # 每次加一
