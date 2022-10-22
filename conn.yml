@@ -11,7 +11,7 @@ htmltx: 'com/data/ql_data.json'
 # 日志存储路径，[普通日志]
 log: 'log/tg.log'
 # 设置程序多久执行一次,分钟
-time: 2
+time: 1
 # 设置误差秒数
 error: 5
 # 设置数据库
@@ -28,7 +28,7 @@ acting:
   - type: 10809
 # 针对特殊脚本的设置,NOT是告诉子段这个不去重
 js:
-  - [ 'jd_shopqd.js', 'NOTexport DPQDTK', '00:03' ]
+  - [ 'jd_shopqd.js', 'NOTexport DPQDTK', '00:02' ]
 # 黑名单
 black: ['221.124.250.54','3.38.184.63']
 # 用于记录行
